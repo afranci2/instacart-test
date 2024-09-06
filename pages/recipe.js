@@ -13,7 +13,6 @@ import {
   HStack,
   Divider,
   SimpleGrid,
-  Badge,
 } from "@chakra-ui/react";
 
 const dummyRecipe = {
@@ -33,7 +32,13 @@ const dummyRecipe = {
   prepTime: "PT15M",
   cookTime: "PT1H",
   recipeYield: "1 loaf",
-  suitableForDiet: "https://schema.org/LowFatDiet"
+  suitableForDiet: "https://schema.org/LowFatDiet",
+  author: "John Smith", // Adding author field to match example
+  interactionStatistic: {
+    "@type": "InteractionCounter",
+    "interactionType": "https://schema.org/Comment",
+    "userInteractionCount": "140"
+  }
 };
 
 export default function RecipePage() {
@@ -43,8 +48,9 @@ export default function RecipePage() {
     script.text = JSON.stringify({
       "@context": "https://schema.org",
       "@type": "Recipe",
+      "author": dummyRecipe.author,
       "name": dummyRecipe.name,
-      "image": [dummyRecipe.image],
+      "image": dummyRecipe.image, // Changed to string, not array
       "description": dummyRecipe.description,
       "recipeIngredient": dummyRecipe.recipeIngredient,
       "recipeInstructions": dummyRecipe.recipeInstructions,
@@ -56,7 +62,8 @@ export default function RecipePage() {
       "prepTime": dummyRecipe.prepTime,
       "cookTime": dummyRecipe.cookTime,
       "recipeYield": dummyRecipe.recipeYield,
-      "suitableForDiet": dummyRecipe.suitableForDiet
+      "suitableForDiet": dummyRecipe.suitableForDiet,
+      "interactionStatistic": dummyRecipe.interactionStatistic, // Added interactionStatistic field
     });
     document.head.appendChild(script);
 
