@@ -18,14 +18,13 @@ import {
 const dummyRecipe = {
   name: "Mom's World Famous Banana Bread",
   image: "https://example.com/bananabread.jpg",
-  description: "This classic banana bread recipe comes from my mom -- the walnuts add a nice texture and flavor to the banana bread.",
+  cookingMethod: "Bake",
   recipeIngredient: [
-    "3 or 4 ripe bananas, smashed",
     "1 egg",
-    "3/4 cup of sugar"
   ],
   recipeInstructions: "Preheat the oven to 350°F (175°C). In a bowl, mix the smashed bananas and sugar. Add the egg and mix well. Sift the flour, baking soda, and salt together. Slowly fold into the banana mixture. Add walnuts and pour the batter into a greased loaf pan. Bake for 60 minutes or until a toothpick inserted into the center comes out clean.",
   nutrition: {
+    
     calories: "240 calories",
     fatContent: "9 grams fat",
   },
@@ -33,12 +32,10 @@ const dummyRecipe = {
   cookTime: "PT1H",
   recipeYield: "1 loaf",
   suitableForDiet: "https://schema.org/LowFatDiet",
-  author: "John Smith", // Adding author field to match example
-  interactionStatistic: {
-    "@type": "InteractionCounter",
-    "interactionType": "https://schema.org/Comment",
-    "userInteractionCount": "140"
-  }
+  recipeCategory: "Dessert",
+  recipeCuisine: "American",
+  restrictedDiet: "LowFatDiet",
+  
 };
 
 export default function RecipePage() {
@@ -48,8 +45,10 @@ export default function RecipePage() {
     script.text = JSON.stringify({
       "@context": "https://schema.org",
       "@type": "Recipe",
-      "author": dummyRecipe.author,
+      "cookingMethod": dummyRecipe.cookingMethod,
+      "recipeCategory": dummyRecipe.recipeCategory,
       "name": dummyRecipe.name,
+      "recipeCuisine": dummyRecipe.recipeCuisine,
       "image": dummyRecipe.image, // Changed to string, not array
       "description": dummyRecipe.description,
       "recipeIngredient": dummyRecipe.recipeIngredient,
@@ -63,7 +62,7 @@ export default function RecipePage() {
       "cookTime": dummyRecipe.cookTime,
       "recipeYield": dummyRecipe.recipeYield,
       "suitableForDiet": dummyRecipe.suitableForDiet,
-      "interactionStatistic": dummyRecipe.interactionStatistic, // Added interactionStatistic field
+      "restrictedDiet": dummyRecipe.restrictedDiet,
     });
     document.head.appendChild(script);
 
