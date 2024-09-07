@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useEffect } from "react";
-import Head from "next/head"; // Import Head to add content specifically for this page
+import React from "react";
+import Head from "next/head";
 import {
   Box,
   Heading,
@@ -38,37 +38,37 @@ const dummyRecipe = {
 };
 
 export default function RecipePage() {
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.type = "application/ld+json";
-    script.text = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "Recipe",
-      "cookingMethod": dummyRecipe.cookingMethod,
-      "recipeCategory": dummyRecipe.recipeCategory,
-      "name": dummyRecipe.name,
-      "recipeCuisine": dummyRecipe.recipeCuisine,
-      "image": dummyRecipe.image, 
-      "description": dummyRecipe.description,
-      "recipeIngredient": dummyRecipe.recipeIngredient,
-      "recipeInstructions": dummyRecipe.recipeInstructions,
-      "nutrition": {
-        "@type": "NutritionInformation",
-        "calories": dummyRecipe.nutrition.calories,
-        "fatContent": dummyRecipe.nutrition.fatContent,
-      },
-      "prepTime": dummyRecipe.prepTime,
-      "cookTime": dummyRecipe.cookTime,
-      "recipeYield": dummyRecipe.recipeYield,
-      "suitableForDiet": dummyRecipe.suitableForDiet,
-    });
-    document.head.appendChild(script);
-  }, []);
-
   return (
     <>
-      {/* Head section to include the Instacart widget script only on this page */}
+      {/* Head section with structured data */}
       <Head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Recipe",
+              "cookingMethod": dummyRecipe.cookingMethod,
+              "recipeCategory": dummyRecipe.recipeCategory,
+              "name": dummyRecipe.name,
+              "recipeCuisine": dummyRecipe.recipeCuisine,
+              "image": dummyRecipe.image, 
+              "description": dummyRecipe.description,
+              "recipeIngredient": dummyRecipe.recipeIngredient,
+              "recipeInstructions": dummyRecipe.recipeInstructions,
+              "nutrition": {
+                "@type": "NutritionInformation",
+                "calories": dummyRecipe.nutrition.calories,
+                "fatContent": dummyRecipe.nutrition.fatContent,
+              },
+              "prepTime": dummyRecipe.prepTime,
+              "cookTime": dummyRecipe.cookTime,
+              "recipeYield": dummyRecipe.recipeYield,
+              "suitableForDiet": dummyRecipe.suitableForDiet,
+            }),
+          }}
+        />
+        {/* Instacart widget script */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -82,7 +82,7 @@ export default function RecipePage() {
           }}
         />
       </Head>
-      
+
       <Box margin="5%">
         <Flex direction="column" align="center">
           <Heading>{dummyRecipe.name}</Heading>
