@@ -66,11 +66,6 @@ export default function RecipePage() {
     });
     document.head.appendChild(script);
 
-    const instacartScript = document.createElement("script");
-    instacartScript.src = "https://widgets.instacart.com/widget-bundle-v2.js";
-    instacartScript.async = true;
-    instacartScript.dataset.source_origin = "affiliate_hub";
-    document.body.appendChild(instacartScript);
   }, []);
 
   return (
